@@ -5,8 +5,11 @@ const FIREBASE_URL =
 
 export const addUser = async (user) => {
   try {
+    // Tạo ID duy nhất bằng cách kết hợp timestamp và số ngẫu nhiên
+    const userId = `${Date.now()}-${Math.floor(Math.random() * 10000)}`;
     const response = await axios.post(FIREBASE_URL, {
       fields: {
+        id: { stringValue: userId }, // Thêm ID vào fields
         name: { stringValue: user.name },
         email: { stringValue: user.email },
         age: { integerValue: user.age },
